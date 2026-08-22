@@ -1,0 +1,218 @@
+[
+  {
+    "id": 1,
+    "image": "images/person01.jpg",
+    "answers": [
+      "浅見 愛智",
+      "あざみ まさと"
+    ]
+  },
+  {
+    "id": 2,
+    "image": "images/person02.jpg",
+    "answers": [
+      "新井 有羽",
+      "あらい ゆう"
+    ]
+  },
+  {
+    "id": 3,
+    "image": "images/person03.jpg",
+    "answers": [
+      "岩本 真奈",
+      "いわもと まな"
+    ]
+  },
+  {
+    "id": 4,
+    "image": "images/person04.jpg",
+    "answers": [
+      "内 希帆",
+      "うち きほ"
+    ]
+  },
+  {
+    "id": 5,
+    "image": "images/person05.jpg",
+    "answers": [
+      "岡田 のの実",
+      "おかだ ののみ"
+    ]
+  },
+  {
+    "id": 6,
+    "image": "images/person06.jpg",
+    "answers": [
+      "假屋 絵莉菜",
+      "かりや えりな"
+    ]
+  },
+  {
+    "id": 7,
+    "image": "images/person07.jpg",
+    "answers": [
+      "河村 実莉",
+      "かわむら みのり"
+    ]
+  },
+  {
+    "id": 8,
+    "image": "images/person08.jpg",
+    "answers": [
+      "小山 莉桜",
+      "こやま りお"
+    ]
+  },
+  {
+    "id": 9,
+    "image": "images/person09.jpg",
+    "answers": [
+      "酒井 唯菜",
+      "さかい ゆいな"
+    ]
+  },
+  {
+    "id": 10,
+    "image": "images/person10.jpg",
+    "answers": [
+      "清水 美琉愛",
+      "しみず みるあ"
+    ]
+  },
+  {
+    "id": 11,
+    "image": "images/person11.jpg",
+    "answers": [
+      "杉田 遥香",
+      "すぎた はるか"
+    ]
+  },
+  {
+    "id": 12,
+    "image": "images/person12.jpg",
+    "answers": [
+      "瀬崎 麻生",
+      "せざき まお"
+    ]
+  },
+  {
+    "id": 13,
+    "image": "images/person13.jpg",
+    "answers": [
+      "堤 優奈",
+      "つつみ ゆな"
+    ]
+  },
+  {
+    "id": 14,
+    "image": "images/person14.jpg",
+    "answers": [
+      "羽藤 日和",
+      "はとう ひより"
+    ]
+  },
+  {
+    "id": 15,
+    "image": "images/person15.jpg",
+    "answers": [
+      "深貝 有柚",
+      "ふかがい ゆゆ"
+    ]
+  },
+  {
+    "id": 16,
+    "image": "images/person16.jpg",
+    "answers": [
+      "古山 菜々美",
+      "ふるやま ななみ"
+    ]
+  },
+  {
+    "id": 17,
+    "image": "images/person17.jpg",
+    "answers": [
+      "堀内 唯花",
+      "ほりうち ゆいか"
+    ]
+  },
+  {
+    "id": 18,
+    "image": "images/person18.jpg",
+    "answers": [
+      "前川 愛莉",
+      "まえかわ あいり"
+    ]
+  },
+  {
+    "id": 19,
+    "image": "images/person19.jpg",
+    "answers": [
+      "前芝 愛理",
+      "まえしば あいり"
+    ]
+  },
+  {
+    "id": 20,
+    "image": "images/person20.jpg",
+    "answers": [
+      "松川 明衣花",
+      "まつかわ めいか"
+    ]
+  },
+  {
+    "id": 21,
+    "image": "images/person21.jpg",
+    "answers": [
+      "松田 桃花",
+      "まつだ ももか"
+    ]
+  },
+  {
+    "id": 22,
+    "image": "images/person22.jpg",
+    "answers": [
+      "宮内 希羽",
+      "みやうち のわ"
+    ]
+  },
+  {
+    "id": 23,
+    "image": "images/person23.jpg",
+    "answers": [
+      "森下 由葵",
+      "もりした ゆあ"
+    ]
+  },
+  {
+    "id": 24,
+    "image": "images/person24.jpg",
+    "answers": [
+      "森 穂乃香",
+      "もり ほのか"
+    ]
+  },
+  {
+    "id": 25,
+    "image": "images/person25.jpg",
+    "answers": [
+      "八木 優羽亜",
+      "やぎ ゆうあ"
+    ]
+  },
+  {
+    "id": 26,
+    "image": "images/person26.jpg",
+    "answers": [
+      "矢田 夏生",
+      "やだ なつき"
+    ]
+  },
+  {
+    "id": 27,
+    "image": "images/person27.jpg",
+    "answers": [
+      "渡邉 べり",
+      "わたなべ べり"
+    ]
+  }
+]
