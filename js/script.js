@@ -316,10 +316,10 @@ function showResult() {
   const rate = state.score / state.questions.length;
   el.scoreComment.textContent =
     rate === 1
-      ? "全問正解！お見事です。"
+      ? "全問正解！スーパーウルトラミラクルナイスゥ！！"
       : rate >= 0.7
       ? "ナイスな正答率です！"
-      : rate >= 0.4
+      : rate >= 0.5
       ? "まずまずの結果です。"
       : "次はもっと解けるはず！復習してみましょう。";
 
