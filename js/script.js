@@ -7,6 +7,8 @@ const state = {
   quizzes: [], // quizzes.json の内容（選択肢一覧）
   allQuestions: [], // 選択したクイズの問題データ（50音順などファイル記載順のまま）
   questions: [], // 出題用（毎回シャッフルしたコピー）
+  currentQuiz: null, // 今挑戦中のクイズ（quizzes.jsonの1件分。titleをシェア文言に使う）
+  totalPoints: 0, // 満点（シェア文言に使う）
   index: 0,
   score: 0,
   points: 0, // 獲得点数の合計
@@ -39,6 +41,7 @@ const el = {
   pointsTotal: document.getElementById("pointsTotal"),
   scoreComment: document.getElementById("scoreComment"),
   reviewList: document.getElementById("reviewList"),
+  btnShare: document.getElementById("btnShare"),
   btnRetry: document.getElementById("btnRetry"),
 };
 
@@ -62,6 +65,7 @@ async function init() {
   el.answerForm.addEventListener("submit", handleSubmit);
   el.btnSkip.addEventListener("click", handleSkip);
   el.btnNext.addEventListener("click", nextQuestion);
+  el.btnShare.addEventListener("click", handleShare);
   el.btnRetry.addEventListener("click", resetQuiz);
 }
 
@@ -130,6 +134,7 @@ async function startQuiz(quiz) {
   }
 
   buildProgressTrack();
+  state.currentQuiz = quiz; // シェア文言用にタイトルを保持
   state.questions = shuffleArray(state.allQuestions); // 出題順は毎回ランダム化
   state.index = 0;
   state.score = 0;
@@ -302,6 +307,7 @@ function showResult() {
     (sum, q) => sum + (q.points?.kanji ?? 1),
     0
   );
+  state.totalPoints = totalPoints; // シェア文言用に保持
   el.pointsTotal.textContent = totalPoints;
   el.scoreTotal.textContent = state.questions.length;
   animateCount(el.pointsCount, state.points);
@@ -352,6 +358,42 @@ function animateCount(targetEl, target) {
 
 function resetQuiz() {
   showScreen("start");
+}
+
+/**
+ * シェア用の投稿文を組み立てる
+ * 例: 「人物名当てクイズ」で 45pt / 54pt（20問/27問）でした！
+ *     https://example.com/quiz-site/
+ */
+function buildShareText() {
+  const quizTitle = state.currentQuiz?.title ?? "クイズ";
+  return `「${quizTitle}」で ${state.points}pt / ${state.totalPoints}pt（${state.score}問/${state.questions.length}問）でした！\n${location.href}`;
+}
+
+/**
+ * 結果をシェアする
+ * - Web Share API対応端末（主にスマホ）: 標準の共有メニューを開く
+ * - 非対応環境（主にPCブラウザ）: クリップボードにコピーして案内する
+ */
+async function handleShare() {
+  const shareText = buildShareText();
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ text: shareText });
+    } catch (err) {
+      // ユーザーが共有メニューをキャンセルした場合などはここに来るが、何もしなくてよい
+    }
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(shareText);
+    alert("結果をコピーしました。SNSアプリなどに貼り付けて投稿してください。");
+  } catch (err) {
+    console.error(err);
+    alert("コピーに失敗しました。お手数ですが結果を手動でコピーしてください。");
+  }
 }
 
 function escapeHtml(str) {
