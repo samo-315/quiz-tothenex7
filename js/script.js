@@ -224,7 +224,7 @@ function handleSkip() {
   state.answered = true;
 
   const q = state.questions[state.index];
-  state.log.push({ question: q, userAnswer: null, isCorrect: false, skipped: true });
+  state.log.push({ question: q, userAnswer: null, isCorrect: false, skipped: true, earnedPoints: 0 });
 
   el.btnSubmit.disabled = true;
   el.btnSkip.disabled = true;
