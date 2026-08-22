@@ -9,7 +9,8 @@ const state = {
   questions: [], // 出題用（毎回シャッフルしたコピー）
   index: 0,
   score: 0,
-  log: [], // { question, userAnswer, isCorrect }
+  answered: false, // 現在の問題にすでに回答/スキップ済みかどうか
+  log: [], // { question, userAnswer, isCorrect, skipped }
 };
 
 const el = {
@@ -25,6 +26,8 @@ const el = {
   qImage: document.getElementById("qImage"),
   answerForm: document.getElementById("answerForm"),
   answerInput: document.getElementById("answerInput"),
+  btnSubmit: document.getElementById("btnSubmit"),
+  btnSkip: document.getElementById("btnSkip"),
   feedback: document.getElementById("feedback"),
   feedbackResult: document.getElementById("feedbackResult"),
   feedbackAnswer: document.getElementById("feedbackAnswer"),
@@ -54,6 +57,7 @@ async function init() {
 
   renderQuizList();
   el.answerForm.addEventListener("submit", handleSubmit);
+  el.btnSkip.addEventListener("click", handleSkip);
   el.btnNext.addEventListener("click", nextQuestion);
   el.btnRetry.addEventListener("click", resetQuiz);
 }
@@ -125,14 +129,22 @@ async function startQuiz(quiz) {
 function renderQuestion() {
   const q = state.questions[state.index];
 
+  state.answered = false;
+
   el.qCounter.textContent = `Q${state.index + 1} / ${state.questions.length}`;
   el.qScoreLive.textContent = `SCORE ${state.score}`;
   el.qImage.src = q.image;
   el.qImage.alt = "誰でしょう？";
 
   el.answerInput.value = "";
+  el.answerInput.disabled = false;
+  el.btnSubmit.disabled = false;
+  el.btnSkip.disabled = false;
+
   el.answerForm.hidden = false;
   el.feedback.hidden = true;
+  el.feedbackResult.textContent = "";
+  el.feedbackAnswer.innerHTML = "";
 
   updateBulbs();
 
@@ -143,9 +155,14 @@ function renderQuestion() {
 function updateBulbs() {
   const bulbs = el.progressTrack.querySelectorAll(".bulb");
   bulbs.forEach((bulb, i) => {
-    bulb.classList.remove("current", "correct", "wrong");
+    bulb.classList.remove("current", "correct", "wrong", "skip");
     if (i < state.log.length) {
-      bulb.classList.add(state.log[i].isCorrect ? "correct" : "wrong");
+      const entry = state.log[i];
+      if (entry.skipped) {
+        bulb.classList.add("skip");
+      } else {
+        bulb.classList.add(entry.isCorrect ? "correct" : "wrong");
+      }
     } else if (i === state.index) {
       bulb.classList.add("current");
     }
@@ -154,27 +171,65 @@ function updateBulbs() {
 
 function handleSubmit(e) {
   e.preventDefault();
+  if (state.answered) return; // 二重回答防止
+  state.answered = true;
+
   const q = state.questions[state.index];
   const userAnswer = el.answerInput.value;
   const isCorrect = judge(userAnswer, q.answers);
 
   if (isCorrect) state.score += 1;
-  state.log.push({ question: q, userAnswer, isCorrect });
+  state.log.push({ question: q, userAnswer, isCorrect, skipped: false });
+
+  el.btnSubmit.disabled = true;
+  el.btnSkip.disabled = true;
+  el.answerInput.disabled = true;
 
   el.answerForm.hidden = true;
   el.feedback.hidden = false;
   el.feedbackResult.textContent = isCorrect ? "正解！" : "不正解";
   el.feedbackResult.className =
     "feedback-result " + (isCorrect ? "is-correct" : "is-wrong");
-  el.feedbackAnswer.innerHTML = `正解は <strong>${escapeHtml(
-    q.answers[0]
-  )}</strong> でした`;
+  el.feedbackAnswer.innerHTML = `正解は <strong>${formatAnswer(q)}</strong> でした`;
 
   el.qScoreLive.textContent = `SCORE ${state.score}`;
   updateBulbs();
 
   el.btnNext.textContent =
     state.index === state.questions.length - 1 ? "結果を見る" : "次の問題へ";
+}
+
+function handleSkip() {
+  if (state.answered) return; // 二重操作防止
+  state.answered = true;
+
+  const q = state.questions[state.index];
+  state.log.push({ question: q, userAnswer: null, isCorrect: false, skipped: true });
+
+  el.btnSubmit.disabled = true;
+  el.btnSkip.disabled = true;
+  el.answerInput.disabled = true;
+
+  el.answerForm.hidden = true;
+  el.feedback.hidden = false;
+  el.feedbackResult.textContent = "スキップしました";
+  el.feedbackResult.className = "feedback-result is-skip";
+  el.feedbackAnswer.innerHTML = `正解は <strong>${formatAnswer(q)}</strong> でした`;
+
+  updateBulbs();
+
+  el.btnNext.textContent =
+    state.index === state.questions.length - 1 ? "結果を見る" : "次の問題へ";
+}
+
+/**
+ * 正解表示用のフォーマット: 「漢字（ひらがな）」
+ * answers[0]=漢字, answers[1]=ひらがな という運用に対応
+ */
+function formatAnswer(question) {
+  const kanji = question.answers[0];
+  const kana = question.answers[1];
+  return kana ? `${escapeHtml(kanji)}（${escapeHtml(kana)}）` : escapeHtml(kanji);
 }
 
 function nextQuestion() {
@@ -226,12 +281,17 @@ function showResult() {
   el.reviewList.innerHTML = "";
   state.log.forEach((entry, i) => {
     const li = document.createElement("li");
-    li.className = "review-item" + (entry.isCorrect ? "" : " wrong");
+    li.className =
+      "review-item" + (entry.skipped ? " skip" : entry.isCorrect ? "" : " wrong");
+    const yourAnswerText = entry.skipped
+      ? "(スキップ)"
+      : entry.userAnswer || "(未回答)";
+    const mark = entry.skipped ? "⏭️" : entry.isCorrect ? "✅" : "❌";
     li.innerHTML = `
       <span class="review-q">Q${i + 1}</span>
-      <span class="review-your">${escapeHtml(entry.userAnswer || "(未回答)")}</span>
+      <span class="review-your">${escapeHtml(yourAnswerText)}</span>
       <span class="review-correct">${escapeHtml(entry.question.answers[0])}</span>
-      <span class="mark">${entry.isCorrect ? "✅" : "❌"}</span>
+      <span class="mark">${mark}</span>
     `;
     el.reviewList.appendChild(li);
   });
