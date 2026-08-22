@@ -349,7 +349,7 @@ body {
 }
 .review-item {
   display: grid;
-  grid-template-columns: 28px 1fr 1fr 24px;
+  grid-template-columns: 28px 1fr 1fr 64px;
   align-items: center;
   gap: 10px;
   padding: 12px 14px;
@@ -368,6 +368,13 @@ body {
 .review-item.wrong .review-your { color: var(--wrong); }
 .review-item.skip .review-your { color: var(--paper-text-dim); font-style: italic; }
 .review-item .mark { text-align: right; }
+.review-points {
+  display: block;
+  margin-top: 2px;
+  color: #ffffff;
+  font-size: 12px;
+  font-family: var(--font-mono);
+}
 
 @media (max-width: 380px) {
   .title { font-size: 26px; }
