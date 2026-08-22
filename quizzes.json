@@ -1,0 +1,8 @@
+[
+  {
+    "id": "people",
+    "title": "人物名当てクイズ",
+    "description": "写真を見て、27名の名前を当てよう",
+    "questionsFile": "questions.json"
+  }
+]
