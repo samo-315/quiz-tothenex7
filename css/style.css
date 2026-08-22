@@ -289,9 +289,14 @@ body {
 /* ---------- 結果画面 ---------- */
 .score-board {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: baseline;
-  gap: 8px;
+  gap: 4px 20px;
   font-family: var(--font-mono);
+}
+.score-group {
+  white-space: nowrap;
 }
 .score-number {
   font-size: 64px;
@@ -305,6 +310,26 @@ body {
 .score-total {
   font-size: 28px;
   color: var(--paper-text-dim);
+}
+.score-unit {
+  font-size: 28px;
+  color: var(--paper-text-dim);
+  margin: 0 2px;
+}
+.score-number-sub {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--paper-text);
+}
+.score-slash-sub,
+.score-total-sub {
+  font-size: 16px;
+  color: var(--paper-text-dim);
+}
+.score-unit-sub {
+  font-size: 16px;
+  color: var(--paper-text-dim);
+  margin: 0 2px;
 }
 .score-comment {
   margin: 0;
