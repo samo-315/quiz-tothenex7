@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>だれでしょう？クイズ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- 進行ライト -->
+  <div id="progressTrack" class="progress-track"></div>
+
+  <!-- スタート画面 -->
+  <section id="screen-start" class="screen active">
+    <p class="eyebrow">PHOTO QUIZ</p>
+    <h1 class="title">だれでしょう？</h1>
+    <p class="lead">画像に写っている人物の名前を当ててください。<br>全問終わったらリザルトが見られます。</p>
+    <button id="btnStart" class="btn btn-primary">クイズを始める</button>
+  </section>
+
+  <!-- 出題画面 -->
+  <section id="screen-quiz" class="screen">
+    <div class="quiz-head">
+      <span id="qCounter" class="q-counter">Q1 / 10</span>
+      <span id="qScoreLive" class="q-score-live">SCORE 0</span>
+    </div>
+
+    <div class="photo-frame">
+      <img id="qImage" src="" alt="人物の写真">
+    </div>
+
+    <form id="answerForm" class="answer-form" autocomplete="off">
+      <label for="answerInput" class="answer-label">この人の名前は？</label>
+      <input type="text" id="answerInput" class="answer-input" placeholder="名前を入力" required>
+      <button type="submit" id="btnSubmit" class="btn btn-primary">回答する</button>
+    </form>
+
+    <div id="feedback" class="feedback" hidden>
+      <p id="feedbackResult" class="feedback-result"></p>
+      <p id="feedbackAnswer" class="feedback-answer"></p>
+      <button id="btnNext" class="btn btn-secondary">次の問題へ</button>
+    </div>
+  </section>
+
+  <!-- 結果画面 -->
+  <section id="screen-result" class="screen">
+    <p class="eyebrow">RESULT</p>
+    <h2 class="title">お疲れさまでした</h2>
+
+    <div class="score-board">
+      <span id="scoreCount" class="score-number">0</span>
+      <span class="score-slash">/</span>
+      <span id="scoreTotal" class="score-total">0</span>
+    </div>
+    <p id="scoreComment" class="score-comment"></p>
+
+    <ol id="reviewList" class="review-list"></ol>
+
+    <button id="btnRetry" class="btn btn-primary">もう一度挑戦する</button>
+  </section>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
