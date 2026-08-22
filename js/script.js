@@ -239,10 +239,11 @@ function handleSkip() {
  * 正解表示用のフォーマット: 「漢字（ひらがな）」
  * answers[0]=漢字, answers[1]=ひらがな という運用に対応
  */
-function formatAnswer(question) {
-  const kanji = question.answers[0];
-  const kana = question.answers[1];
-  return kana ? `${escapeHtml(kanji)}（${escapeHtml(kana)}）` : escapeHtml(kanji);
+function formatAnswer(question, { newlineBetween = false } = {}) {
+  const kanji = escapeHtml(question.answers[0]);
+  const kana = question.answers[1] ? escapeHtml(question.answers[1]) : "";
+  if (!kana) return kanji;
+  return newlineBetween ? `${kanji}<br>（${kana}）` : `${kanji}（${kana}）`;
 }
 
 function nextQuestion() {
@@ -303,7 +304,7 @@ function showResult() {
     li.innerHTML = `
       <span class="review-q">Q${i + 1}</span>
       <span class="review-your">${escapeHtml(yourAnswerText)}</span>
-      <span class="review-correct">${formatAnswer(entry.question)}</span>
+            <span class="review-correct">${formatAnswer(entry.question, { newlineBetween: true })}</span>
       <span class="mark">${mark}</span>
     `;
     el.reviewList.appendChild(li);
