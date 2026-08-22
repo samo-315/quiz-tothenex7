@@ -303,7 +303,7 @@ function showResult() {
     li.innerHTML = `
       <span class="review-q">Q${i + 1}</span>
       <span class="review-your">${escapeHtml(yourAnswerText)}</span>
-      <span class="review-correct">${escapeHtml(entry.question.answers[0])}</span>
+      <span class="review-correct">${formatAnswer(entry.question)}</span>
       <span class="mark">${mark}</span>
     `;
     el.reviewList.appendChild(li);
