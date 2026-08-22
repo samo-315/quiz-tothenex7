@@ -149,7 +149,7 @@ function renderQuestion() {
   state.answered = false;
 
   el.qCounter.textContent = `Q${state.index + 1} / ${state.questions.length}`;
-  el.qScoreLive.textContent = `SCORE ${state.score}`;
+  el.qScoreLive.textContent = `SCORE ${state.points}pt / ${state.score}○`;
   el.qImage.src = q.image;
   el.qImage.alt = "誰でしょう？";
 
@@ -212,7 +212,7 @@ function handleSubmit(e) {
     "feedback-result " + (isCorrect ? "is-correct" : "is-wrong");
   el.feedbackAnswer.innerHTML = `正解は <strong>${formatAnswer(q)}</strong> でした`;
 
-  el.qScoreLive.textContent = `SCORE ${state.score}`;
+  el.qScoreLive.textContent = `SCORE ${state.points}pt / ${state.score}○`;
   updateBulbs();
 
   el.btnNext.textContent =
@@ -235,6 +235,7 @@ function handleSkip() {
   el.feedbackResult.textContent = "スキップしました";
   el.feedbackResult.className = "feedback-result is-skip";
   el.feedbackAnswer.innerHTML = `正解は <strong>${formatAnswer(q)}</strong> でした`;
+  el.qScoreLive.textContent = `SCORE ${state.points}pt / ${state.score}○`;
 
   updateBulbs();
 
@@ -328,8 +329,8 @@ function showResult() {
     li.innerHTML = `
       <span class="review-q">Q${i + 1}</span>
       <span class="review-your">${escapeHtml(yourAnswerText)}</span>
-            <span class="review-correct">${formatAnswer(entry.question, { newlineBetween: true })}</span>
-      <span class="mark">${mark}</span>
+      <span class="review-correct">${formatAnswer(entry.question, { newlineBetween: true })}</span>
+      <span class="mark">${mark}<span class="review-points">${entry.earnedPoints}pt</span></span>
     `;
     el.reviewList.appendChild(li);
   });
