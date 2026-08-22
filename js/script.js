@@ -9,6 +9,7 @@ const state = {
   questions: [], // 出題用（毎回シャッフルしたコピー）
   index: 0,
   score: 0,
+  points: 0, // 獲得点数の合計
   answered: false, // 現在の問題にすでに回答/スキップ済みかどうか
   log: [], // { question, userAnswer, isCorrect, skipped }
 };
@@ -34,6 +35,8 @@ const el = {
   btnNext: document.getElementById("btnNext"),
   scoreCount: document.getElementById("scoreCount"),
   scoreTotal: document.getElementById("scoreTotal"),
+  pointsCount: document.getElementById("pointsCount"),
+  pointsTotal: document.getElementById("pointsTotal"),
   scoreComment: document.getElementById("scoreComment"),
   reviewList: document.getElementById("reviewList"),
   btnRetry: document.getElementById("btnRetry"),
@@ -130,6 +133,7 @@ async function startQuiz(quiz) {
   state.questions = shuffleArray(state.allQuestions); // 出題順は毎回ランダム化
   state.index = 0;
   state.score = 0;
+  state.points = 0;
   state.log = [];
 
   // 出題順が決まった時点で全画像の先読みを開始（表示時のラグを減らす）
@@ -189,10 +193,13 @@ function handleSubmit(e) {
 
   const q = state.questions[state.index];
   const userAnswer = el.answerInput.value;
-  const isCorrect = judge(userAnswer, q.answers);
+  const matchedIndex = judge(userAnswer, q.answers); // -1, 0(漢字), 1(ひらがな)
+  const isCorrect = matchedIndex !== -1;
+  const earnedPoints = getEarnedPoints(q, matchedIndex);
 
   if (isCorrect) state.score += 1;
-  state.log.push({ question: q, userAnswer, isCorrect, skipped: false });
+  state.points += earnedPoints;
+  state.log.push({ question: q, userAnswer, isCorrect, skipped: false, earnedPoints });
 
   el.btnSubmit.disabled = true;
   el.btnSkip.disabled = true;
@@ -274,13 +281,30 @@ function judge(userAnswer, acceptableAnswers) {
       );
 
   const normalizedUser = normalize(userAnswer);
-  return acceptableAnswers.some((ans) => normalize(ans) === normalizedUser);
+  // 一致した箇所の添字を返す（0=漢字, 1=ひらがな, -1=不一致）
+  return acceptableAnswers.findIndex((ans) => normalize(ans) === normalizedUser);
+}
+
+/**
+ * 一致した箇所(0=漢字, 1=ひらがな)に応じた獲得点数を返す
+ */
+function getEarnedPoints(question, matchedIndex) {
+  if (matchedIndex === 0) return question.points?.kanji ?? 1;
+  if (matchedIndex === 1) return question.points?.hiragana ?? 1;
+  return 0;
 }
 
 function showResult() {
   showScreen("result");
+
+  const totalPoints = state.questions.reduce(
+    (sum, q) => sum + (q.points?.kanji ?? 1),
+    0
+  );
+  el.pointsTotal.textContent = totalPoints;
   el.scoreTotal.textContent = state.questions.length;
-  animateScoreCount(state.score);
+  animateCount(el.pointsCount, state.points);
+  animateCount(el.scoreCount, state.score);
 
   const rate = state.score / state.questions.length;
   el.scoreComment.textContent =
@@ -311,15 +335,15 @@ function showResult() {
   });
 }
 
-function animateScoreCount(target) {
+function animateCount(targetEl, target) {
   let current = 0;
   const step = () => {
     current += 1;
-    el.scoreCount.textContent = current;
+    targetEl.textContent = current;
     if (current < target) requestAnimationFrame(() => setTimeout(step, 80));
   };
   if (target === 0) {
-    el.scoreCount.textContent = "0";
+    targetEl.textContent = "0";
   } else {
     step();
   }
