@@ -106,6 +106,15 @@ function shuffleArray(array) {
   return result;
 }
 
+/**
+ * 画像を先読みしてブラウザキャッシュに乗せておく（表示時のラグを減らす）
+ */
+function preloadImage(src) {
+  if (!src) return;
+  const img = new Image();
+  img.src = src;
+}
+
 async function startQuiz(quiz) {
   try {
     const res = await fetch(quiz.questionsFile);
@@ -122,6 +131,10 @@ async function startQuiz(quiz) {
   state.index = 0;
   state.score = 0;
   state.log = [];
+
+  // 出題順が決まった時点で全画像の先読みを開始（表示時のラグを減らす）
+  state.questions.forEach((q) => preloadImage(q.image));
+  
   showScreen("quiz");
   renderQuestion();
 }
