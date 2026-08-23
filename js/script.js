@@ -316,7 +316,7 @@ function showResult() {
   const rate = state.score / state.questions.length;
   el.scoreComment.textContent =
     rate === 1
-      ? "全問正解！スーパーウルトラミラクルナイスゥ！！"
+      ? "パーフェクト！スーパーウルトラミラクルナイスゥ！！"
       : rate >= 0.7
       ? "ナイスな正答率です！"
       : rate >= 0.5
