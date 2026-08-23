@@ -20,6 +20,7 @@ const el = {
   screens: {
     start: document.getElementById("screen-start"),
     quiz: document.getElementById("screen-quiz"),
+    quizBatch: document.getElementById("screen-quiz-batch"),
     result: document.getElementById("screen-result"),
   },
   progressTrack: document.getElementById("progressTrack"),
@@ -35,6 +36,9 @@ const el = {
   feedbackResult: document.getElementById("feedbackResult"),
   feedbackAnswer: document.getElementById("feedbackAnswer"),
   btnNext: document.getElementById("btnNext"),
+  batchQuizTitle: document.getElementById("batchQuizTitle"),
+  batchForm: document.getElementById("batchForm"),
+  batchQuestionList: document.getElementById("batchQuestionList"),
   scoreCount: document.getElementById("scoreCount"),
   scoreTotal: document.getElementById("scoreTotal"),
   pointsCount: document.getElementById("pointsCount"),
@@ -67,6 +71,7 @@ async function init() {
   el.btnNext.addEventListener("click", nextQuestion);
   el.btnShare.addEventListener("click", handleShare);
   el.btnRetry.addEventListener("click", resetQuiz);
+  el.batchForm.addEventListener("submit", handleBatchSubmit);
 }
 
 function renderQuizList() {
@@ -133,19 +138,85 @@ async function startQuiz(quiz) {
     return;
   }
 
-  buildProgressTrack();
-  state.currentQuiz = quiz; // シェア文言用にタイトルを保持
+  state.currentQuiz = quiz; // シェア文言・タイトル表示用に保持
   state.questions = shuffleArray(state.allQuestions); // 出題順は毎回ランダム化
   state.index = 0;
   state.score = 0;
   state.points = 0;
   state.log = [];
 
+  if (quiz.type === "batch") {
+    startBatchQuiz();
+  } else {
+    startSequentialQuiz();
+  }
+}
+
+/**
+ * 1問ずつ画面遷移するタイプの出題（人物名当てクイズなど）
+ */
+function startSequentialQuiz() {
+  buildProgressTrack();
+
   // 出題順が決まった時点で全画像の先読みを開始（表示時のラグを減らす）
   state.questions.forEach((q) => preloadImage(q.image));
-  
+
   showScreen("quiz");
   renderQuestion();
+}
+
+/**
+ * 全問1画面に並べて、まとめて送信するタイプの出題（文章問題クイズなど）
+ */
+function startBatchQuiz() {
+  el.batchQuizTitle.textContent = state.currentQuiz?.title ?? "";
+  renderBatchQuestions();
+  showScreen("quizBatch");
+}
+
+function renderBatchQuestions() {
+  el.batchQuestionList.innerHTML = "";
+  state.questions.forEach((q, i) => {
+    const li = document.createElement("li");
+    li.className = "batch-question";
+    li.innerHTML = `
+      <span class="batch-question-number">Q${i + 1}</span>
+      <p class="batch-question-text">${escapeHtml(q.question)}</p>
+      <textarea class="batch-answer-input" data-index="${i}" rows="2" placeholder="回答を入力"></textarea>
+    `;
+    el.batchQuestionList.appendChild(li);
+  });
+}
+
+function handleBatchSubmit(e) {
+  e.preventDefault();
+
+  const inputs = el.batchQuestionList.querySelectorAll(".batch-answer-input");
+  state.log = [];
+  state.score = 0;
+  state.points = 0;
+
+  inputs.forEach((input) => {
+    const i = Number(input.dataset.index);
+    const q = state.questions[i];
+    const userAnswer = input.value.trim();
+
+    if (!userAnswer) {
+      // 未入力はスキップ扱い
+      state.log.push({ question: q, userAnswer: null, isCorrect: false, skipped: true, earnedPoints: 0 });
+      return;
+    }
+
+    const matchedIndex = judge(userAnswer, q.answers);
+    const isCorrect = matchedIndex !== -1;
+    const earnedPoints = getEarnedPoints(q, matchedIndex);
+
+    if (isCorrect) state.score += 1;
+    state.points += earnedPoints;
+    state.log.push({ question: q, userAnswer: input.value, isCorrect, skipped: false, earnedPoints });
+  });
+
+  showResult();
 }
 
 function renderQuestion() {
@@ -249,10 +320,14 @@ function handleSkip() {
 }
 
 /**
- * 正解表示用のフォーマット: 「漢字（ひらがな）」
- * answers[0]=漢字, answers[1]=ひらがな という運用に対応
+ * 正解表示用のフォーマット
+ * - question.displayAnswer がある場合（文章問題クイズなど）: それをそのまま表示
+ * - ない場合（人物名当てクイズなど）: 「漢字（ひらがな）」形式
+ *   answers[0]=漢字, answers[1]=ひらがな という運用に対応
  */
 function formatAnswer(question, { newlineBetween = false } = {}) {
+  if (question.displayAnswer) return escapeHtml(question.displayAnswer);
+
   const kanji = escapeHtml(question.answers[0]);
   const kana = question.answers[1] ? escapeHtml(question.answers[1]) : "";
   if (!kana) return kanji;
@@ -292,19 +367,23 @@ function judge(userAnswer, acceptableAnswers) {
 }
 
 /**
- * 一致した箇所(0=漢字, 1=ひらがな)に応じた獲得点数を返す
+ * 一致した箇所に応じた獲得点数を返す
+ * - question.points が数値の場合（文章問題クイズなど）: 正解なら points をそのまま加算
+ * - question.points が {kanji, hiragana} の場合（人物名当てクイズなど）: 一致した表記に応じて加算
  */
 function getEarnedPoints(question, matchedIndex) {
+  if (matchedIndex === -1) return 0;
+  if (typeof question.points === "number") return question.points;
   if (matchedIndex === 0) return question.points?.kanji ?? 1;
   if (matchedIndex === 1) return question.points?.hiragana ?? 1;
-  return 0;
+  return 1;
 }
 
 function showResult() {
   showScreen("result");
 
   const totalPoints = state.questions.reduce(
-    (sum, q) => sum + (q.points?.kanji ?? 1),
+    (sum, q) => sum + (typeof q.points === "number" ? q.points : q.points?.kanji ?? 1),
     0
   );
   state.totalPoints = totalPoints; // シェア文言用に保持
@@ -403,3 +482,4 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
+
