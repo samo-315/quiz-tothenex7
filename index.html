@@ -21,12 +21,11 @@
     <ul id="quizList" class="quiz-list"></ul>
   </section>
 
-  <!-- 出題画面 -->
+  <!-- 出題画面（一問ずつ） -->
   <section id="screen-quiz" class="screen">
-    
     <!-- 進行ライト -->
     <div id="progressTrack" class="progress-track"></div>
-    
+
     <div class="quiz-head">
       <span id="qCounter" class="q-counter">Q1 / 10</span>
       <span id="qScoreLive" class="q-score-live">SCORE 0</span>
@@ -52,6 +51,15 @@
       <p id="feedbackAnswer" class="feedback-answer"></p>
       <button id="btnNext" class="btn btn-secondary">次の問題へ</button>
     </div>
+  </section>
+
+  <!-- 出題画面（全問一覧・文章問題用） -->
+  <section id="screen-quiz-batch" class="screen">
+    <h2 id="batchQuizTitle" class="title batch-title"></h2>
+    <form id="batchForm" class="batch-form" autocomplete="off">
+      <ol id="batchQuestionList" class="batch-question-list"></ol>
+      <button type="submit" id="btnBatchSubmit" class="btn btn-primary batch-submit">結果を確認する</button>
+    </form>
   </section>
 
   <!-- 結果画面 -->
