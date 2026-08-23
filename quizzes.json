@@ -4,5 +4,13 @@
     "title": "候補生名前当てクイズ",
     "description": "候補生の名前、覚えていますか？",
     "questionsFile": "questions.json"
+    "type": "sequential"
+  },
+  {
+    "id": "text-trivia",
+    "title": "プロフィールクイズ",
+    "description": "候補生のことをもっと知っておこう！",
+    "questionsFile": "questions-text.json",
+    "type": "batch"
   }
 ]
