@@ -3,7 +3,7 @@
     "id": "people",
     "title": "候補生名前当てクイズ",
     "description": "候補生の名前、覚えていますか？",
-    "questionsFile": "questions.json"
+    "questionsFile": "questions.json",
     "type": "sequential"
   },
   {
