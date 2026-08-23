@@ -76,7 +76,9 @@ async function init() {
 
 function renderQuizList() {
   el.quizList.innerHTML = "";
-  state.quizzes.forEach((quiz) => {
+  state.quizzes
+    .filter((quiz) => !quiz.hidden) // hidden: true のクイズは選択画面に出さない
+    .forEach((quiz) => {
     const li = document.createElement("li");
     const button = document.createElement("button");
     button.type = "button";
