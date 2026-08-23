@@ -12,6 +12,6 @@
     "description": "候補生のことをもっと知っておこう！",
     "questionsFile": "questions-text.json",
     "type": "batch",
-    "hidden": true
+    "hidden": false
   }
 ]
