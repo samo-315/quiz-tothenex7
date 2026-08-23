@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "question": "浅見愛智の出身県は？(解答例：東京都)",
+    "question": "浅見愛智の出身は？(回答例：東京都)",
     "answers": ["埼玉県"],
     "displayAnswer": "埼玉県",
     "points": 1
@@ -12,5 +12,369 @@
     "answers": ["ギター"],
     "displayAnswer": "ギター",
     "points": 1
-  }
+  },
+  {
+    "id": 3,
+    "question": "新井有羽の出身は？(回答例：東京都)",
+    "answers": ["京都府"],
+    "displayAnswer": "京都府",
+    "points": 1
+  },
+  {
+    "id": 4,
+    "question": "新井有羽の特技は歌、卓球、あと1つは？",
+    "answers": ["スノーボード"],
+    "displayAnswer": "スノーボード",
+    "points": 1
+  },
+  {
+    "id": 5,
+    "question": "岩本真奈は何年生まれ？(回答例：○○○○年)",
+    "answers": ["2002年"],
+    "displayAnswer": "2002年",
+    "points": 1
+  },
+  {
+    "id": 6,
+    "question": "岩本真奈の特技は「○○をすぐ見つけられる」○○に入る言葉は？",
+    "answers": ["人のいい所"],
+    "displayAnswer": "ひとの人のいい所",
+    "points": 1
+  },
+  {
+    "id": 7,
+    "question": "内希帆の出身は？(回答例：東京都)",
+    "answers": ["大阪府"],
+    "displayAnswer": "大阪府",
+    "points": 1
+  },
+  {
+    "id": 8,
+    "question": "内希帆の趣味は音楽を聴くことと何？",
+    "answers": ["作詞"],
+    "displayAnswer": "作詞",
+    "points": 1
+  },
+  {
+    "id": 9,
+    "question": "岡田のの実の出身は？(回答例：東京都)",
+    "answers": ["福岡県"],
+    "displayAnswer": "福岡県",
+    "points": 1
+  },
+  {
+    "id": 10,
+    "question": "岡田のの実の特技は誰のモノマネ？(敬称略で回答)",
+    "answers": ["黒柳徹子"],
+    "displayAnswer": "黒柳徹子",
+    "points": 1
+  },
+  {
+    "id": 11,
+    "question": "假屋絵莉菜は何年生まれ？(回答例：○○○○年)",
+    "answers": ["2007年"],
+    "displayAnswer": "2007年",
+    "points": 1
+  },
+  {
+    "id": 12,
+    "question": "假屋絵莉菜の特技は高速○○ ○○に入る言葉は？",
+    "answers": ["ラップ"],
+    "displayAnswer": "ラップ",
+    "points": 1
+  },
+  {
+    "id": 13,
+    "question": "河村実莉の出身は？(回答例：東京都)",
+    "answers": ["兵庫県"],
+    "displayAnswer": "兵庫県",
+    "points": 1
+  },
+  {
+    "id": 14,
+    "question": "河村実莉の趣味はネイル、音楽鑑賞、散歩、あと1つは？",
+    "answers": ["ドライブ"],
+    "displayAnswer": "ドライブ",
+    "points": 1
+  },
+  {
+    "id": 15,
+    "question": "小山莉桜の特技は？",
+    "answers": ["つま先を腰につける"],
+    "displayAnswer": "つま先を腰につける",
+    "points": 1
+  },
+  {
+    "id": 16,
+    "question": "小山莉桜のコメントに「推してくれたら○○‼️」とあるが、○○に入る言葉は？",
+    "answers": ["うれシーサー"],
+    "displayAnswer": "うれシーサー",
+    "points": 1
+  },
+  {
+    "id": 17,
+    "question": "酒井唯菜の出身は？(回答例：東京都)",
+    "answers": ["愛媛県"],
+    "displayAnswer": "愛媛県",
+    "points": 1
+  },
+  {
+    "id": 18,
+    "question": "酒井唯菜の趣味は？",
+    "answers": ["ミシン"],
+    "displayAnswer": "ミシン",
+    "points": 1
+  },
+  {
+    "id": 19,
+    "question": "清水美琉愛の特技は人よりも何が広がること？",
+    "answers": ["鼻の穴"],
+    "displayAnswer": "鼻の穴",
+    "points": 1
+  },
+  {
+    "id": 20,
+    "question": "清水美琉愛の趣味はたくさん沢山○○こと ○○に入る言葉は？",
+    "answers": ["寝る"],
+    "displayAnswer": "寝る",
+    "points": 1
+  },
+  {
+    "id": 21,
+    "question": "杉田遥香のMBTIはメンバーの誰と同じ？(活動名で回答)",
+    "answers": ["NONA"],
+    "displayAnswer": "NONA",
+    "points": 1
+  },
+  {
+    "id": 22,
+    "question": "杉田遥香のスターバックスの会員ランクは？(回答例：○○会員)",
+    "answers": ["ゴールド会員"],
+    "displayAnswer": "ゴールド会員",
+    "points": 1
+  },
+  {
+    "id": 23,
+    "question": "瀬崎麻生の特技は人とすぐ○○こと ○○に入る言葉は？",
+    "answers": ["打ち解ける"],
+    "displayAnswer": "打ち解ける",
+    "points": 1
+  },
+  {
+    "id": 24,
+    "question": "瀬崎麻生の趣味は何と過ごすこと？",
+    "answers": ["愛犬"],
+    "displayAnswer": "愛犬",
+    "points": 1
+  },
+  {
+    "id": 25,
+    "question": "堤優奈の特技は、予定を立てると大体どうなること？",
+    "answers": ["雨が降る"],
+    "displayAnswer": "雨が降る",
+    "points": 1
+  },
+  {
+    "id": 26,
+    "question": "堤優奈の趣味は何を育てること？",
+    "answers": ["観葉植物"],
+    "displayAnswer": "観葉植物",
+    "points": 1
+  },
+  {
+    "id": 27,
+    "question": "羽藤日和の出身は？(回答例：東京都)",
+    "answers": ["兵庫県"],
+    "displayAnswer": "兵庫県",
+    "points": 1
+  },
+  {
+    "id": 28,
+    "question": "羽藤日和のMBTIはメンバーの誰と同じ？(活動名で回答)",
+    "answers": ["RINO"],
+    "displayAnswer": "RINO",
+    "points": 1
+  },
+  {
+    "id": 29,
+    "question": "深貝有柚の出身は？(回答例：東京都)",
+    "answers": ["岐阜県"],
+    "displayAnswer": "岐阜県",
+    "points": 1
+  },
+  {
+    "id": 30,
+    "question": "深貝有柚の特技は何をどうすること？(回答例：○○を○○する事)",
+    "answers": ["眉毛を八の字にする事"],
+    "displayAnswer": "眉毛を八の字にする事",
+    "points": 1
+  },
+  {
+    "id": 31,
+    "question": "古山菜々美の特技は？",
+    "answers": ["横揺れ"],
+    "displayAnswer": "横揺れ",
+    "points": 1
+  },
+  {
+    "id": 32,
+    "question": "古山菜々美の趣味は何巡り？(回答例：○○巡り)",
+    "answers": ["抹茶カフェ巡り"],
+    "displayAnswer": "抹茶カフェ巡り",
+    "points": 1
+  },
+  {
+    "id": 33,
+    "question": "堀内唯花は何年生まれ？(回答例：○○○○年)",
+    "answers": ["2003年"],
+    "displayAnswer": "2003年",
+    "points": 1
+  },
+  {
+    "id": 34,
+    "question": "堀内唯花の趣味は何集め？(回答例：○○集め)",
+    "answers": ["香水集め"],
+    "displayAnswer": "香水集め",
+    "points": 1
+  },
+  {
+    "id": 35,
+    "question": "前川愛莉は何年生まれ？(回答例：○○○○年)",
+    "answers": ["2001年"],
+    "displayAnswer": "2001年",
+    "points": 1
+  },
+  {
+    "id": 36,
+    "question": "前川愛莉のMBTIは？",
+    "answers": ["ENTJ"],
+    "displayAnswer": "ENTJ",
+    "points": 1
+  },
+  {
+    "id": 37,
+    "question": "前芝愛理の出身は？(回答例：東京都)",
+    "answers": ["奈良県"],
+    "displayAnswer": "奈良県",
+    "points": 1
+  },
+  {
+    "id": 38,
+    "question": "前芝愛理の趣味は何を集めること？",
+    "answers": ["シール"],
+    "displayAnswer": "シール",
+    "points": 1
+  },
+  {
+    "id": 39,
+    "question": "松川明衣花は何年生まれ？(回答例：○○○○年)",
+    "answers": ["2008年"],
+    "displayAnswer": "2008年",
+    "points": 1
+  },
+  {
+    "id": 40,
+    "question": "松川明衣花の特技は○○みたいなポーズができること ○○に入る言葉は？",
+    "answers": ["フラミンゴ"],
+    "displayAnswer": "フラミンゴ",
+    "points": 1
+  },
+  {
+    "id": 41,
+    "question": "松田桃花の特技は、歌を歌うことと何をすること？",
+    "answers": ["ネイルをする"],
+    "displayAnswer": "ネイルをする",
+    "points": 1
+  },
+  {
+    "id": 42,
+    "question": "松田桃花の趣味は音楽を聴く、歌を歌う、あと1つは？",
+    "answers": ["温泉に行く"],
+    "displayAnswer": "温泉に行く",
+    "points": 1
+  },
+  {
+    "id": 43,
+    "question": "宮内希羽は何年生まれ？(回答例：○○○○年)",
+    "answers": ["2008年"],
+    "displayAnswer": "2008年",
+    "points": 1
+  },
+  {
+    "id": 44,
+    "question": "宮内希羽の特技は目のイラストを描く、肩甲骨同士をくっつける、感情系の表現、あと1つは？",
+    "answers": ["アイスの早食い"],
+    "displayAnswer": "アイスの早食い",
+    "points": 1
+  },
+  {
+    "id": 45,
+    "question": "森下由葵の出身は？(回答例：東京都)",
+    "answers": ["神奈川県"],
+    "displayAnswer": "神奈川県",
+    "points": 1
+  },
+  {
+    "id": 46,
+    "question": "森下由葵の特技は何ダンス？",
+    "answers": ["ポールダンス"],
+    "displayAnswer": "ポールダンス",
+    "points": 1
+  },
+  {
+    "id": 47,
+    "question": "森穂乃香は何年生まれ？(回答例：○○○年)",
+    "answers": ["2009年"],
+    "displayAnswer": "2009年",
+    "points": 1
+  },
+  {
+    "id": 48,
+    "question": "森穂乃香の趣味はショッピング、カフェ巡り、あと1つは？",
+    "answers": ["ドラマ鑑賞"],
+    "displayAnswer": "ドラマ鑑賞",
+    "points": 1
+  },
+  {
+    "id": 49,
+    "question": "八木優羽亜のMBTIは？(TかAかは記入しなくてよい)",
+    "answers": ["INFJ"],
+    "displayAnswer": "INFJ",
+    "points": 1
+  },
+  {
+    "id": 50,
+    "question": "八木優羽亜の趣味は小説を書くこと、あと1つは？",
+    "answers": ["猫を愛でること"],
+    "displayAnswer": "猫を愛でること",
+    "points": 1
+  },
+  {
+    "id": 51,
+    "question": "矢田夏生の出身は？(回答例：東京都)",
+    "answers": ["京都府"],
+    "displayAnswer": "京都府",
+    "points": 1
+  },
+  {
+    "id": 52,
+    "question": "矢田夏生のMBTIはメンバーの誰と同じ？(活動名で回答)",
+    "answers": ["RIO"],
+    "displayAnswer": "RIO",
+    "points": 1
+  },
+  {
+    "id": 53,
+    "question": "渡邉べりの特技は子供と遊ぶことですが、子供とどんな風に接することができると説明している？",
+    "answers": ["同じ目線"],
+    "displayAnswer": "同じ目線",
+    "points": 1
+  },
+  {
+    "id": 54,
+    "question": "渡邉べりの趣味はどんな映画を見ること？(回答例：○○映画)",
+    "answers": ["ディズニー映画"],
+    "displayAnswer": "ディズニー映画",
+    "points": 1
+  },
 ]
