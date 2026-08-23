@@ -11,6 +11,7 @@
     "title": "プロフィールクイズ",
     "description": "候補生のことをもっと知っておこう！",
     "questionsFile": "questions-text.json",
-    "type": "batch"
+    "type": "batch",
+    "hidden": true
   }
 ]
